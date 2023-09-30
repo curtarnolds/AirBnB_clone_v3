@@ -3,17 +3,17 @@
 Contains the class DBStorage
 """
 
-import models
+import models  # noqa
 from models.amenity import Amenity
-from models.base_model import BaseModel, Base
+from models.base_model import BaseModel, Base  # noqa
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
 from os import getenv
-import sqlalchemy
-from sqlalchemy import create_engine
+import sqlalchemy  # noqa
+from sqlalchemy import create_engine, select
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Amenity": Amenity, "City": City,
@@ -77,8 +77,10 @@ class DBStorage:
 
     def get(self, cls, id):
         """Retrieve one object"""
-        key = f"{cls.__name__}.{id}"
-        return self.__objects.get(key, None)
+        if cls in classes.values():
+            return self.__session.scalars(
+                select(cls)
+                .where(cls.id == id)).first()
 
     def count(self, cls=None):
         """Return the number of objects that match the given class.
@@ -86,11 +88,10 @@ class DBStorage:
         Args:
             cls: A class
         """
-        count = 0
         if cls:
-            for obj in self.__objects.values():
-                if type(obj) is cls:
-                    count += 1
-            return count
+            return len(self.__session.scalars(select(cls)).all())
         else:
-            return len(self.__objects)
+            count = 0
+            for obj in classes.values():
+                count += len(self.__session.scalars(select(obj)).all())
+            return count
