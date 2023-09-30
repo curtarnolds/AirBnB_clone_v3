@@ -88,7 +88,7 @@ class DBStorage:
         Args:
             cls: A class
         """
-        if cls:
+        if cls and cls in classes.values():
             return len(self.__session.scalars(select(cls)).all())
         else:
             count = 0

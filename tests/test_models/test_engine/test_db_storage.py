@@ -3,19 +3,19 @@
 Contains the TestDBStorageDocs and TestDBStorage classes
 """
 
-from datetime import datetime
+from datetime import datetime  # noqa
 import inspect
 import models
 from models.engine import db_storage
 from models.amenity import Amenity
-from models.base_model import BaseModel
+from models.base_model import BaseModel  # noqa
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-import json
-import os
+import json  # noqa
+import os  # noqa
 import pep8
 import unittest
 DBStorage = db_storage.DBStorage
