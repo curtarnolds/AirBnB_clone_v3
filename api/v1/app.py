@@ -19,6 +19,6 @@ def close_db(exception):
 if __name__ == '__main__':
     if getenv('HBNB_API_HOST') and getenv('HBNB_API_PORT'):
         app.run(host=getenv('HBNB_API_HOST'),
-                port=(getenv('HBNB_API_PORT')), threaded=True)
+                port=int((getenv('HBNB_API_PORT'))), threaded=True)
     else:
         app.run(host='0.0.0.0', port=5000, threaded=True)
