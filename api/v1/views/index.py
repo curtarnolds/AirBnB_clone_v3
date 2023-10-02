@@ -8,5 +8,5 @@ from flask import jsonify
 def status():
     """Return api status"""
     return jsonify({
-        "status": "OK"
+        "status": "OK",
         })
