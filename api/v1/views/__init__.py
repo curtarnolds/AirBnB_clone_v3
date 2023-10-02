@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """A simple views package"""
 from flask import Blueprint
 
