@@ -7,8 +7,8 @@ from models import storage
 from models.user import User
 
 
-@app_views.route('/users', methods=['GET'])
 @app_views.route('/users/', methods=['GET'])
+@app_views.route('/users', methods=['GET'])
 def get_users():
     """Retrieve all User objects"""
     user_obj = storage.all('User')
