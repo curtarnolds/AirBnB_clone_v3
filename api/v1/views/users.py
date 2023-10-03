@@ -38,8 +38,8 @@ def delete_user(user_id):
         abort(404)
 
 
-@app_views.route('/users', methods=['POST'])
 @app_views.route('/users/', methods=['POST'])
+@app_views.route('/users', methods=['POST'])
 def create_user():
     """Creates a user"""
     user = request.get_json()
