@@ -65,15 +65,16 @@ def update_user(user_id):
         if not user:
             abort(400, description='Not a JSON')
         else:
-            keys_to_remove = ['updated_at']
-            filtered_user = {key: value for key, value in user_obj.to_dict()
-                             .items()
+            keys_to_remove = ['created_at', 'updated_at', 'id', 'email']
+            filtered_user = {key: value for key, value in user.items()
                              if key not in keys_to_remove}
-            filtered_user['name'] = user['name']
-            new_user = User(**filtered_user)
-            storage.new(new_user)
+            filtered_user['id'] = user_obj['id']
+            filtered_user['email'] = user_obj['email']
+            filtered_user['created_at'] = user_obj['created_at']
+            updated_user = User(**filtered_user)
+            storage.new(updated_user)
             storage.delete(user_obj)
             storage.save()
-            return jsonify(new_user.to_dict()), 200
+            return jsonify(updated_user.to_dict()), 200
     else:
         abort(404)
