@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""A sample flask app"""
+"""A sample flask app
+"""
 from flask import Flask, make_response, jsonify
 from models import storage
 from os import getenv
@@ -12,12 +13,15 @@ app.register_blueprint(app_views)
 
 @app.errorhandler(404)
 def not_found(error):
+    """Custom 404
+    """
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
 @app.teardown_appcontext
 def close_db(exception):
-    """Close the database"""
+    """Close the database
+    """
     storage.close()
 
 
