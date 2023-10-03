@@ -5,7 +5,7 @@ import json  # noqa
 import requests
 
 if __name__ == "__main__":
-    r = requests.get("http://0.0.0.0:5000/api/v1/stats")
+    r = requests.get("http://0.0.0.0:5050/api/v1/stats")
     r_j = r.json()
     print(r_j.get("amenities", 0))
     print(r_j.get("cities", 0))
