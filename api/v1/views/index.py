@@ -21,7 +21,7 @@ def status():
         })
 
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def stats():
     """Retrieve the number of each object by type"""
     stats_by_storage = {
