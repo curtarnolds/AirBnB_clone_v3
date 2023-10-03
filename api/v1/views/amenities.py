@@ -68,7 +68,7 @@ def update_amenity_by_id(amenity_id):
                                 .items()
                                 if key not in keys_to_remove}
             filtered_amenity['name'] = amenity['name']
-            new_amenity = amenity(**filtered_amenity)
+            new_amenity = Amenity(**filtered_amenity)
             storage.new(new_amenity)
             storage.delete(amenity_obj)
             storage.save()
