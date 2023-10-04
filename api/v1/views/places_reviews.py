@@ -61,6 +61,7 @@ def create_review(place_id):
         else:
             new_review = Review(text=review['text'], place_id=place_id,
                                 user_id=review['user_id'])
+            new_review = Review(**review)
             storage.new(new_review)
             storage.save()
             return jsonify(new_review.to_dict()), 201
