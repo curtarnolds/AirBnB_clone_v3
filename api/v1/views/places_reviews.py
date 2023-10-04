@@ -68,7 +68,7 @@ def create_review(place_id):
         abort(404)
 
 
-@app_views.route('/cities/<city_id>', methods=['PUT'])
+@app_views.route('/reviews/<review_id>', methods=['PUT'])
 def update_review(review_id):
     """Updates a review object"""
     review_obj = storage.get(Review, review_id)
@@ -81,11 +81,13 @@ def update_review(review_id):
                               'updated_at']
             filtered_review = {key: value for key, value in review.items()
                                if key not in keys_to_remove}
-            updated_review = Review(**filtered_review)
-            updated_review.save()
+            for name, value in filtered_review.items():
+                setattr(review_obj, name, value)
+            # updated_review = Review(**filtered_review)
+            # updated_review.save()
             # storage.new(updated_review)
             # storage.delete(review_obj)
             # storage.save()
-            return jsonify(updated_review.to_dict()), 200
+            return jsonify(review_obj.to_dict()), 200
     else:
         abort(404)
