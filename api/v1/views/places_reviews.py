@@ -15,7 +15,8 @@ def get_reviews_by_place_id(place_id):
     """Retrieve list of reviews of a place"""
     place_obj = storage.get(Place, place_id)
     if place_obj:
-        reviews = [review.to_dict() for review in place_obj.reviews]
+        reviews = [storage.get(Review, review).to_dict() for review in
+                   place_obj.reviews]
         return jsonify(reviews)
     else:
         abort(404)
