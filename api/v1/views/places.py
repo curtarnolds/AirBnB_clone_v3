@@ -43,6 +43,7 @@ def delete_place(place_id):
 
 
 @app_views.route('/cities/<city_id>/places', methods=['POST'])
+@app_views.route('/states/<state_id>/cities/', methods=['POST'])
 def create_place(city_id):
     """Creates a Place in a specified city"""
     city_obj = storage.get(City, city_id)
