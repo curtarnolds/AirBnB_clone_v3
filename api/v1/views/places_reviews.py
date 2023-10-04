@@ -43,8 +43,8 @@ def delete_review(review_id):
         abort(404)
 
 
-@app_views.route('/places/<place_id>/reviews', methods=['POST'])
 @app_views.route('/places/<place_id>/reviews/', methods=['POST'])
+@app_views.route('/places/<place_id>/reviews', methods=['POST'])
 def create_review(place_id):
     """Creates a review"""
     place_obj = storage.get(Place, place_id)
