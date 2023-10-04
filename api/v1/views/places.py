@@ -9,13 +9,13 @@ from models.place import Place
 from models.user import User
 
 
-@app_views.route('/cities/<city_id>/places/', methods=['GET'])
 @app_views.route('/cities/<city_id>/places', methods=['GET'])
 def get_places_by_city_id(city_id):
     """Retrieve list of places of a city"""
     city_obj = storage.get(City, city_id)
     if city_obj:
-        places = [place.to_dict() for place in city_obj.places if place]
+        places = [place.to_dict() for place in city_obj.places if len(city_obj.places) > 0]
+        if
         return jsonify(places)
     else:
         abort(404)
